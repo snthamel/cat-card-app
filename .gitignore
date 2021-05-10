@@ -105,3 +105,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# application output files
+src/output/*.jpeg
+src/output/*.jpg
+src/output/*.png
