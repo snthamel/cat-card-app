@@ -1,17 +1,9 @@
-const express = require("express");
 const axios = require('axios');
 const blend = require('@mapbox/blend');
 const { existsSync, writeFileSync } = require('fs');
+const { baseUrl, imagePath } = require('../config/config');
 
-global.__basedir = __dirname;
-
-const port = process.env.PORT || 3000;
-const baseUrl = process.env.BASE_URL || `http://localhost:${port}/`;
-const imagePath = process.env.IMAGE_PATH || __basedir + '/src/output/';
-
-var app = express();
-
-app.get('/', async (req, res) => {
+const createCatCard = async (req, res) => {
     try {
         const {
             greeting = 'Hello',
@@ -36,27 +28,17 @@ app.get('/', async (req, res) => {
             message: error.message
         });
     }
-});
+}
 
-app.get('/:filename', async (req, res) => {
-    try {
-        const fileName = req.params.filename;
-        const downloadPath = imagePath + fileName;
-
-        if (existsSync(downloadPath)) {
-            return res.status(200).download(downloadPath, fileName);
-        } else {
-            return res.status(404).json({
-                message: 'Image not found'
-            });
-        }
-    } catch (error) {
-        return res.status(500).json({
-            message: error.message
-        });
-    }
-});
-
+/**
+ * Fetch image for specified data from https://cataas.com/ and return image as a buffer
+ * @param {string} tag Tag name to search the cat images from
+ * @param {int} width Width of image
+ * @param {int} height Height of image
+ * @param {string} color Color for text caption on the image
+ * @param {string} size 
+ * @returns Buffer
+ */
 const fetchCatImage = async (tag, width, height, color, size) => {
     return new Promise((resolve, reject) => {
         axios.get(
@@ -72,6 +54,14 @@ const fetchCatImage = async (tag, width, height, color, size) => {
     });
 }
 
+/**
+ * Merge image buffers and save new image
+ * @param {Array} images Array of image buffers
+ * @param {int} width Width of one image
+ * @param {int} height Height of one image
+ * @param {string} format Output format
+ * @returns Saved image name and download url
+ */
 const mergeImages = async (images, width, height, format = 'jpeg') => {
     try {
         const b64MergedImage = await new Promise((resolve, reject) => {
@@ -99,6 +89,26 @@ const mergeImages = async (images, width, height, format = 'jpeg') => {
     }
 }
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+const downloadCard = async (req, res) => {
+    try {
+        const fileName = req.params.filename;
+        const downloadPath = imagePath + fileName;
+
+        if (existsSync(downloadPath)) {
+            return res.status(200).download(downloadPath, fileName);
+        } else {
+            return res.status(404).json({
+                message: 'Image not found'
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+}
+
+module.exports = {
+    createCatCard,
+    downloadCard
+}

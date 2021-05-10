@@ -1,16 +1,17 @@
 {
     "name": "cat-card-app",
     "version": "1.0.0",
-    "main": "app.js",
+    "main": "src/app.js",
     "scripts": {
-        "start": "node app.js",
-        "start-watch": "nodemon app.js"
+        "start": "node src/app.js",
+        "start-watch": "nodemon src/app.js"
     },
     "author": "Shehan Thamel",
     "license": "GPL-3.0-only",
     "dependencies": {
         "@mapbox/blend": "^2.0.1",
         "axios": "^0.21.1",
+        "cors": "^2.8.5",
         "express": "^4.17.1"
     },
     "devDependencies": {
