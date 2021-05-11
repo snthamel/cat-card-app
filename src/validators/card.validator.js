@@ -4,6 +4,9 @@ const errorFormatter = ({ msg }) => {
     return msg;
 };
 
+/**
+ * Run validations against API request and throw error if any validation failed
+ */
 module.exports.validateCreateCatCard = async (req, res, next) => {
     try {
         await Promise.all(
@@ -54,5 +57,3 @@ module.exports.validateCreateCatCard = async (req, res, next) => {
         });
     }
 };
-
-
