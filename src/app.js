@@ -5,7 +5,6 @@ const app = express();
 
 // Define global baseurl for image download url
 global.__basedir = path.join(__dirname, '/../');
-const { port } = require('./config/config');
 
 // Setup CORS and parse url encoded request body
 app.use(cors());
@@ -20,6 +19,4 @@ app.get('/demo', function (req, res) {
 const cardRoutes = require('./routes/card.routes');
 app.use(cardRoutes);
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+module.exports = app;
