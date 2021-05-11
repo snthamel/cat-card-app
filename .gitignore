@@ -110,3 +110,7 @@ dist
 src/output/*.jpeg
 src/output/*.jpg
 src/output/*.png
+
+.DS_Store
+
+src/tests/coverage

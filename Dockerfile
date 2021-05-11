@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:14
 
 # Update system libraries
 RUN apt-get update
@@ -11,9 +11,7 @@ COPY package.json ./
 RUN npm install
 
 # Bundle application source
-COPY ./src ./src
-COPY ./demo ./demo
-
+COPY . .
 
 EXPOSE 3000
 CMD ["node", "src/app.js"]
