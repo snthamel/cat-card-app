@@ -21,7 +21,7 @@ docker run -v $PWD/src/tests/coverage:/usr/src/app/src/tests/coverage -p 3000:30
 
 ## Demo
 
-Once the API service is built and started using above commands, browse http://localhost:8080/demo on a web browser to view the demo application.
+Once the API service is built and started using above commands, browse http://localhost:8080 on a web browser to view the demo application.
 
 Alternatively, API documentation can be browsed through http://localhost:3000/api-docs
 
