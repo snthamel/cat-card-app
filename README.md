@@ -8,13 +8,13 @@ This site can be built and deployed to `Docker` container. For instructions on i
 
 ## Build
 
-Run the below command within the project folder to build the API service docker image
+Run the following command within the project folder to build the API service docker image
 
 ```
 docker build . -t cat-card-app
 ```
 
-Run the below start the API service
+Run the following command to start the API service
 ```
 docker run -p 3000:3000 -d --name cat-card-app cat-card-app
 ```
@@ -27,7 +27,7 @@ Alternatively, API documentation can be browsed through http://localhost:3000/ap
 
 ## Testing
 
-After building the API service docker image, run the below command to test the application
+After building the API service docker image, run the following command to test the application
 ```
 docker exec -it cat-card-app npm test
 ```
