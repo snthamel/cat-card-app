@@ -16,18 +16,18 @@ docker build . -t cat-card-app
 
 Run the following command to start the API service
 ```
-docker run -p 3000:3000 -d --name cat-card-app cat-card-app
+docker run -v $PWD/src/tests/coverage:/usr/src/app/src/tests/coverage -p 3000:3000 -p 8080:80 -d --name cat-card-app cat-card-app
 ```
 
 ## Demo
 
-Once the API service is built and started using above commands, browse http://localhost:3000/demo on a web browser to view the demo application.
+Once the API service is built and started using above commands, browse http://localhost:8080/demo on a web browser to view the demo application.
 
 Alternatively, API documentation can be browsed through http://localhost:3000/api-docs
 
 ## Testing
 
-After building the API service docker image, run the following command to test the application
+After starting the API service, run the following command to test the application
 ```
 docker exec -it cat-card-app npm test
 ```

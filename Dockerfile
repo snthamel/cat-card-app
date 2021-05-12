@@ -14,4 +14,11 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-CMD ["node", "src/app.js"]
+
+RUN apt-get install nginx -y
+
+COPY ./demo /var/www/html/
+
+EXPOSE 80
+
+CMD bash -c "service nginx start && node src/server.js"

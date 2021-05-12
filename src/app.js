@@ -16,11 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 // Http headers security
 app.use(helmet());
 
-// demo UI path
-app.get('/demo', function (req, res) {
-    res.sendFile(__basedir + '/demo/index.html');
-});
-
 // Setup API documentation
 const swaggerSpec = require('./config/swagger').spec();
 app.use(
